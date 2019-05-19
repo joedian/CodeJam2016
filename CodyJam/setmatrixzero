@@ -1,0 +1,51 @@
+class Solution {
+    public static void setZeroes(int[][] matrix) {
+        if(matrix.length == 0 || matrix[0].length == 0){
+            return;
+        }
+        
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        for(int i = 0 ; i <m ; i++){
+            for(int j = 0 ; j <n ; j++){
+                if(matrix[i][j] == 0){
+                    matrix[i][j] = -888;
+                    setRow(matrix, i, j, m , n);
+                    setColumn(matrix, i, j , m, n); 
+                    break;
+                }
+            }
+        }
+        
+            for(int i = 0 ; i <m ; i++){
+                for(int j = 0 ; j <n ; j++){
+                    if(matrix[i][j] == -888){
+                        matrix[i][j] = 0;
+                    }
+                }
+            }
+    }
+    
+    public static void setColumn(int[][] matrix, int row, int col, int m, int n){      
+        for(int j = 0; j < m && col < n; j++){
+            if(matrix[j][col] == 0){
+                matrix[j][col] =-888;
+                setRow(matrix, j,col, m, n);
+            }else{
+                matrix[j][col] = -888;
+            }
+        }
+    }
+    
+    public static void setRow(int[][] matrix , int row, int col, int m, int n){
+        for(int j = 0; j < n&& row < m; j ++){
+            if(matrix[row][j] == 0){
+                matrix[row][j] =-888;
+                setColumn(matrix,row, j,m,n);
+            }else{
+                matrix[row][j] =-888;
+            } 
+        }
+    }
+}
